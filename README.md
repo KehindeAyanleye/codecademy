@@ -39,13 +39,17 @@ function Person(first,last,age) {
     
 
 
-//Building a Cash Register
 var cashRegister = {
     total:0,
     //Dont forget to add your property
     add: function(itemCost) {
+        this.lastTransactionAmount = itemCost;
         this.total +=  itemCost;
     },
+    
+    
+    
+    
     scan: function(item,quantity) {
         switch (item) {
         case "eggs": this.add(0.98 * quantity); break;
@@ -56,7 +60,9 @@ var cashRegister = {
         return true;
     },
     //Add the voidLastTransaction Method here
-    
+   voidLastTransaction: function() {
+    this.total -= this.lastTransactionAmount;
+},
     
 };
 
@@ -66,7 +72,8 @@ cashRegister.scan('magazine',1);
 cashRegister.scan('chocolate',4);
 
 //Void the last transaction and then add 3 instead
-
+cashRegister.voidLastTransaction();
+cashRegister.scan('chocolate',3);
 
 //Show the total bill
 console.log('Your bill is '+cashRegister.total);
